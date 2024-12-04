@@ -18,17 +18,16 @@ class House:
 
     def __eq__(self, other):
         if isinstance(other, House):
-            if self.number_of_floors == other.number_of_floors:
-                return True
-            else:
-                return False
+            return self.number_of_floors == other.number_of_floors
+        elif isinstance(other, int):
+            return self.number_of_floors == other
+
 
     def __lt__(self, other):
         if isinstance(other, House):
-            if self.number_of_floors < other.number_of_floors:
-                return True
-            else:
-                return False
+            return self.number_of_floors < other.number_of_floors
+        elif isinstance(other, int):
+            return self.number_of_floors < other
 
     def __le__(self, other):
         if isinstance(other, House):
@@ -61,6 +60,8 @@ class House:
     def __add__(self, value):
         if isinstance(value, int):
             self.number_of_floors += value
+            return self
+        elif isinstance(value, House):
             return self
 
     def __radd__(self, value):
@@ -98,13 +99,8 @@ print(h1 < h2)  # __lt__
 print(h1 <= h2)  # __le__
 print(h1 != h2)  # __ne__
 
-# Так оно все работает, но у меня два вопроса:
-#
-# 1. Если результат isinstance получится False, что в этом случае делать?
-#    Из задания я не понял.
-# 2. Вот эту строку в задании я не понял:
-#    Остальные методы арифметических операторов, где self - x, other - y:
-#
-#
-#
+# Если я правильно понял, переделать надо только три функции.
+# Саму идею понял.
+# Так гораздо лучше. Не булевские значения возвращать,
+# а результат операции сравнения.
 #
